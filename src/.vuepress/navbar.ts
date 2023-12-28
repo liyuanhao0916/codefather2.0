@@ -77,10 +77,6 @@ export default navbar([
       {
         text: "etcd", link: "/docs/Go/etcd",
       },
-
-
-
-
     ]
   },
   {
@@ -124,21 +120,21 @@ export default navbar([
     text: "运维",
     children: [
       {
-        text: "Git", link: "/docs/运维/1 Git",
+        text: "Git", link: "/docs/运维/Git",
       }, {
-        text: "Tomcat", link: "/docs/运维/1 Tomcat",
+        text: "Tomcat", link: "/docs/运维/其他",
       }, {
-        text: "Maven", link: "/docs/运维/2 Maven",
+        text: "Maven", link: "/docs/运维/Maven",
       }, {
-        text: "Docker", link: "/docs/运维/3 Docker",
+        text: "Docker", link: "/docs/运维/云原生",
       }, {
-        text: "Linux", link: "/docs/运维/4 Linux",
+        text: "Linux", link: "/docs/运维/Linux",
       }, {
-        text: "软件安装", link: "/docs/运维/5 软件安装",
+        text: "软件安装", link: "/docs/运维/软件安装",
       }, {
-        text: "内网穿透", link: "/docs/运维/6 frp内网穿透",
+        text: "内网穿透", link: "/docs/运维/内网穿透",
       }, {
-        text: "Nginx", link: "/docs/运维/7 Nginx",
+        text: "Nginx", link: "/docs/运维/Nginx",
       },
     ]
   },
@@ -186,9 +182,9 @@ export default navbar([
   {
     text: "经验之谈",
     children: [
-      {
-        text: "博客搭建", link: "/docs/经验之谈/1 WordPress博客",
-      },
+      // {
+      //   text: "博客搭建", link: "/docs/经验之谈/1 WordPress博客",
+      // },
       {
         text: "Spring", link: "/docs/经验之谈/2 Spring",
       },
@@ -198,9 +194,9 @@ export default navbar([
       {
         text: "面试", link: "/docs/经验之谈/4 面试",
       },
-      {
-        text: "Ubuntu", link: "/docs/经验之谈/5 Ubuntu",
-      },
+      // {
+      //   text: "Ubuntu", link: "/docs/经验之谈/5 Ubuntu",
+      // },
       {
         text: "Postman", link: "/docs/经验之谈/6 Postman",
       },
@@ -217,6 +213,8 @@ export default navbar([
     text: "项目案例",
     children: [
       {
+        text: "答题系统", link: "/docs/项目案例/博客搭建",
+      }, {
         text: "答题系统", link: "/docs/项目案例/答题系统",
       },
       {
