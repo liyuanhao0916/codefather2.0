@@ -1,3 +1,13 @@
+---
+isOriginal: true
+category: 
+    - 运维
+    - Linux
+    - 云原生
+tag: 
+  - Jenkins
+---
+
 # Jenkins
 
 ## 安装

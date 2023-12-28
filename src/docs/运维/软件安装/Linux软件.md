@@ -1,4 +1,16 @@
-# 软件安装
+---
+isOriginal: true
+category: 
+    - 运维
+    - 软件
+    - 玩机
+tag: 
+  - Linux
+  - Java
+  - jdk
+---
+
+# Linux 软件安装
 
 ## 环境
 

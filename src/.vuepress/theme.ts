@@ -10,7 +10,7 @@ export default hopeTheme({
 
   author: {       // 全局默认作者
     name: "程序员李某某",
-    url: "https://mister-hope.com",
+    url: "http://codefather.botuer.com",
   },
   darkmode: "disable",     // 禁用深色
   iconAssets: "fontawesome-with-brands",    // 字体图标资源链接
@@ -35,10 +35,10 @@ export default hopeTheme({
   sidebar,  // 侧边栏配置
   headerDepth: 5, // 目录深度
 
-  footer: "默认页脚字符串",   // 默认页脚字符串
+  // footer: "默认页脚字符串",   // 默认页脚字符串
 
 
-  breadcrumb: false,
+  breadcrumb: false,  // 是否全局启用路径导航
 
   displayFooter: true,    // 是否默认显示页脚
   pageInfo: ["Author", "Original", "Date", "Category", "Tag", "ReadingTime"],

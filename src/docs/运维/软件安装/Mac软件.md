@@ -1,3 +1,19 @@
+---
+isOriginal: true
+category: 
+    - 运维
+    - 软件
+    - 玩机
+tag: 
+  - Mac
+  - 苹果
+---
+# Mac 软件安装
+
+## Homebrew 包管理
+
+### 常用命令
+
 ```sh
 #更新Homebrew
 brew update

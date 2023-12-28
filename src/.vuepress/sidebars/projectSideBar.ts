@@ -4,7 +4,16 @@ import defaultSideBar from "./defaultSideBar";
 
 export default [
   ...defaultSideBar,
-
+  {
+    text: "博客搭建",
+    collapsible: true,
+    prefix: "/docs/项目案例/博客搭建",
+    children: [
+      { text: "WordPress", link: "WordPress", },
+      { text: "VuePress", link: "VuePress", },
+      { text: "VuePress2", link: "VuePress2", },
+    ],
+  },
   {
     text: "项目案例",
     collapsible: true,

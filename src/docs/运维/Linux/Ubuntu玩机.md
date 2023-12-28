@@ -1,4 +1,14 @@
-# Ubuntu
+---
+isOriginal: true
+category: 
+    - 玩机
+    - Linux
+tag: 
+  - Ubuntu
+
+---
+
+# Ubuntu 玩机
 
 ## 软件
 

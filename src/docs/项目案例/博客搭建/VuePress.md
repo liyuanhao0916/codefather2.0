@@ -1,3 +1,14 @@
+---
+isOriginal: true
+category: 
+    - 经验
+    - Linux
+    - 玩机
+    - 博客
+tag: 
+  - VuePress
+---
+
 # VuePress
 
 ## 介绍
@@ -1271,7 +1282,7 @@ yarn add -D vuepress-plugin-ribbon-animation
 
 如果不能正常显示，先尝试调整 `z-index` 属性，如果无论如何调整都不能有合适的效果，请使用 CSS 为你的主题添加样式覆盖
 
-### 动态标题
+### 动态标题（不好使）
 
 安装
 

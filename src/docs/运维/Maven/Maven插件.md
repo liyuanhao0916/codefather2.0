@@ -1,6 +1,17 @@
-### 打包插件-Assembly
+---
+isOriginal: true
+category: 
+  - 运维
+  - Maven
+tag: 
+  - 插件
+---
 
-#### 官方（不推荐）
+# Maven 插件
+
+## 打包插件-Assembly
+
+### 官方（不推荐）
 
 **pom**
 
@@ -55,7 +66,7 @@
 
 
 
-#### 自定义
+### 自定义
 
 **pom**
 
@@ -151,7 +162,7 @@
 </assembly>
 ```
 
-#### 示例1：打包dubbo
+### 示例1：打包dubbo
 
 [参考](https://www.jianshu.com/p/d657c506aaa6)
 
@@ -221,7 +232,7 @@
 </assembly>
 ```
 
-#### 示例2：项目打包
+### 示例2：项目打包
 
 **pom**
 

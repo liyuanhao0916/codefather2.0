@@ -1,4 +1,14 @@
-# 内网穿透
+---
+isOriginal: true
+category: 
+    - 运维
+    - Linux
+    - 内网穿透
+tag: 
+  - frp
+---
+
+# 自建 frp
 
 ## 安装
 

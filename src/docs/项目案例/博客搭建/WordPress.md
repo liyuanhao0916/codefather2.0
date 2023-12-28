@@ -1,3 +1,14 @@
+---
+isOriginal: true
+category: 
+    - 经验
+    - Linux
+    - 玩机
+    - 博客
+tag: 
+  - WordPress
+---
+
 # WordPress
 
 ## 更改文章的链接
