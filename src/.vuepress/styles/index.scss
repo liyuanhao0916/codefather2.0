@@ -1,0 +1,95 @@
+// 侧边栏
+.vp-sidebar {
+
+    // padding-inline-start: calc(var(--sidebar-space) - var(--sidebar-width));
+    padding-inline-start: 3rem;
+    box-shadow: 0 2px 8px var(--card-shadow);
+
+}
+
+// titile
+.vp-site-name {
+    font-weight: 600;
+}
+
+
+// 导航栏
+.vp-navbar .nav-item>.nav-link {
+    // display: block;
+    font-size: 0.98rem;
+    // font-family: inherit;
+    // cursor: inherit;
+    // padding: inherit;
+    // line-height: 1.4rem;
+    // background: transparent;
+    // border: none;
+    // font-weight: 600;
+    color: #33485a;
+}
+
+.dropdown-title>.title {
+    color: #33485a;
+}
+
+// 覆盖代码块语言字体颜色
+pre[class*="language-"]::before {
+    color: #fff !important;
+
+    html[data-theme="dark"] & {
+        background-color: #222 !important;
+    }
+}
+
+.dropdown-wrapper .dropdown-subtitle {
+    margin: 0;
+    padding: 0.5rem 0.25rem 0;
+    font-weight: 600;
+    font-size: .85rem;
+    line-height: 3;
+    text-transform: uppercase;
+    color: #222;
+    transition: color var(--color-transition);
+}
+
+.nav-item.hide-in-mobile {
+    font-size: 0.9rem;
+    padding-left: 0.3rem;
+}
+
+.search-box input {
+    width: 12rem !important;
+}
+
+// #toc .toc-item::before {
+//     content: '';
+//     width: 4px;
+//     height: 4px;
+//     border-radius: 50%;
+//     background-color: #222;
+//     position: absolute;
+//     top: 12px;
+//     left: 0;
+// }
+
+// #toc {
+//     position: absolute;
+//     inset-inline-start: calc(100% - 80px);
+//     // margin-inline-start: 10%;
+//     // display: none;
+
+//     min-width: 10rem;
+//     max-width: 15rem;
+// }
+
+// .theme-container .vp-page {
+//     padding-top: var(--navbar-height);
+//     padding-inline-start: calc(var(--sidebar-width) + 2rem);
+// }
+
+// .theme-hope-content:not(.custom) {
+//     max-width: var(--content-width);
+//     /* margin: 0 auto; */
+//     padding: 2rem 2.5rem;
+//     padding-top: 0;
+//     margin-left: 80px;
+// }

@@ -1,0 +1,10 @@
+
+node_modules/
+src/.vuepress/.cache/
+src/.vuepress/.temp/
+src/.vuepress/dist/
+
+node_modules/
+codefather2.0/.vuepress/.cache/
+codefather2.0/.vuepress/.temp/
+codefather2.0/.vuepress/dist/
