@@ -213,8 +213,9 @@ export default navbar([
     text: "项目案例",
     children: [
       {
-        text: "答题系统", link: "/docs/项目案例/博客搭建",
-      }, {
+        text: "博客搭建", link: "/docs/项目案例/博客搭建",
+      },
+      {
         text: "答题系统", link: "/docs/项目案例/答题系统",
       },
       {
@@ -229,5 +230,5 @@ export default navbar([
 
     ]
   },
- 
+
 ]);
