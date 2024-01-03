@@ -268,6 +268,38 @@ copyright: false
 footer: 使用 <a href="https://theme-hope.vuejs.press/zh/" target="_blank">VuePress Theme Hope</a> 主题 | MIT 协议, 版权所有 © 2019-present Mr.Hope
 ---
 
+<!-- <AutoCatalog /> -->
+## 
+  <!-- <VPCard
+    v-for="i in 12"
+    title="Mr.Hope"
+    desc="Where there is light, there is hope"
+    logo="https://mister-hope.com/logo.svg"
+    link="https://mister-hope.com"
+    background="rgba(253, 230, 138, 0.15)"
+  /> -->
+
+  <VPCard
+    title="shields"
+    desc="➢ 强大的徽章图标生成工具"
+    link="https://shields.io/"
+    background="rgba(253, 230, 138, 0.15)"
+  />
+  <VPCard
+    title="字节图标"
+    desc="➢ 字节图标库"
+    link="https://iconpark.oceanengine.com/home"
+    background="rgba(253, 230, 138, 0.15)"
+  />
+  <VPCard
+    title="许虎虎工具箱"
+    desc="➢ 许虎虎工具箱"
+    link="https://www.xuhuhu.com/"
+    background="rgba(253, 230, 138, 0.15)"
+  />
+
+  <SiteInfo name="免费API" url="https://www.free-api.com/" preview="https://theme-hope.vuejs.press/assets/image/mrhope.jpg" repo="https://github.com/fangzesheng/free-api"/>
+
 这是项目主页的案例。你可以在这里放置你的主体内容。
 
 想要使用此布局，你需要在页面 front matter 中设置 `home: true`。

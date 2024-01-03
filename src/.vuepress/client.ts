@@ -14,10 +14,10 @@ export default defineClientConfig({
     setup() {
         onMounted(() => {
             // 鼠标点击碎片 https://moefy-canvas.nyakku.moe
-            cursorEffects({
-                size: 2,
-                shape: 'star',
-            });
+            // cursorEffects({
+            //     size: 2,
+            //     shape: 'star',
+            // });
         })
     },
 });

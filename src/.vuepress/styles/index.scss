@@ -1,7 +1,7 @@
 // 侧边栏
 .vp-sidebar {
 
-    // padding-inline-start: calc(var(--sidebar-space) - var(--sidebar-width));
+    padding-inline-start: calc(var(--sidebar-space) - var(--sidebar-width));
     padding-inline-start: 3rem;
     box-shadow: 0 2px 8px var(--card-shadow);
 
@@ -16,7 +16,7 @@
 // 导航栏
 .vp-navbar .nav-item>.nav-link {
     // display: block;
-    font-size: 0.98rem;
+    // font-size: 0.98rem;
     // font-family: inherit;
     // cursor: inherit;
     // padding: inherit;
@@ -32,23 +32,23 @@
 }
 
 // 覆盖代码块语言字体颜色
-pre[class*="language-"]::before {
-    color: #fff !important;
+// pre[class*="language-"]::before {
+//     color: #fff !important;
 
-    html[data-theme="dark"] & {
-        background-color: #222 !important;
-    }
-}
+//     html[data-theme="dark"] & {
+//         background-color: #222 !important;
+//     }
+// }
 
 .dropdown-wrapper .dropdown-subtitle {
-    margin: 0;
-    padding: 0.5rem 0.25rem 0;
-    font-weight: 600;
-    font-size: .85rem;
-    line-height: 3;
-    text-transform: uppercase;
+    // margin: 0;
+    // padding: 0.5rem 0.25rem 0;
+    // font-weight: 600;
+    // font-size: .85rem;
+    // line-height: 3;
+    // text-transform: uppercase;
     color: #222;
-    transition: color var(--color-transition);
+    // transition: color var(--color-transition);
 }
 
 .nav-item.hide-in-mobile {
@@ -56,9 +56,9 @@ pre[class*="language-"]::before {
     padding-left: 0.3rem;
 }
 
-.search-box input {
-    width: 12rem !important;
-}
+// .search-box input {
+//     width: 12rem !important;
+// }
 
 // #toc .toc-item::before {
 //     content: '';
@@ -93,3 +93,12 @@ pre[class*="language-"]::before {
 //     padding-top: 0;
 //     margin-left: 80px;
 // }
+
+#toc .toc-link.level2 {
+    color: var(--light-grey);
+    font-weight: 600;
+}
+
+#toc .toc-link.level3 {
+    color: var(--light-grey);
+}

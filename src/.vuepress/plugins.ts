@@ -1,5 +1,9 @@
 import { PluginsOptions } from "vuepress-theme-hope";
 import { searchPlugin } from "@vuepress/plugin-search";
+import { componentsPlugin } from "vuepress-plugin-components";
+import { registerComponentsPlugin } from '@vuepress/plugin-register-components'
+// import { getDirname, path } from 'vuepress/utils'
+import path from 'path'
 
 
 export const pluginsExt = [
@@ -18,7 +22,54 @@ export const pluginsExt = [
                 placeholder: "搜索",
             },
         },
-        maxSuggestions:10,
+        maxSuggestions: 10,
+    }),
+    registerComponentsPlugin({
+        // 配置项
+        components: {
+            // RightBar: path.resolve(__dirname, './theme/components/RightBar.vue'),
+            // test: path.resolve(__dirname, './theme/components/test.vue'),
+            // PageSidebar: path.resolve(__dirname, './theme/components/ExtraSidebar.vue'),
+        },
+    }),
+    // [
+    //     'vuepress-plugin-right-anchor',
+    //     {
+    //         showDepth: 1,
+    //         ignore: [
+    //             '/',
+    //             '/api/'
+    //             // 更多...
+    //         ],
+    //         expand: {
+    //             trigger: 'hover',
+    //             clickModeDefaultOpen: true
+    //         },
+    //         customClass: 'your-customClass',
+    //     }
+    // ],
+    componentsPlugin({
+        // 插件选项
+        components: [
+            "VPCard",       // 卡片组件，可用于展示项目。https://plugin-components.vuejs.press/zh/guide/content/card.html
+            "Share",        // 分享组件，将页面内容分享到社交媒体 https://plugin-components.vuejs.press/zh/guide/utilities/share.html
+            "SiteInfo",     // 站点信息组件，可用于友情链接或项目展示。https://plugin-components.vuejs.press/zh/guide/content/site-info.html
+            "VPBanner",     // 用于展示 banner https://plugin-components.vuejs.press/zh/guide/content/banner.html
+            "Badge",        // 自定义颜色的徽章 https://plugin-components.vuejs.press/zh/guide/utilities/badge.html
+            "FontIcon",     // 用于展示字体图标 https://plugin-components.vuejs.press/zh/guide/utilities/font-icon.html
+            // "VidStack",     // 视频播放器
+            // "VideoPlayer",  // 视频播放器
+            // "BiliBili",     // B站视频播放器 https://plugin-components.vuejs.press/zh/guide/media/bili-bili.html
+            // "XiGua",        // 西瓜视频播放器
+            // "YouTube",      // YouTube播放器
+            // "ArtPlayer",    // 视频播放器 https://plugin-components.vuejs.press/zh/guide/media/art-player.html
+            // "AudioPlayer",  // 音频播放器 https://plugin-components.vuejs.press/zh/guide/media/audio-player.html
+            // "CodePen",      // https://plugin-components.vuejs.press/zh/guide/code/code-pen.html
+            // "Replit",       // https://plugin-components.vuejs.press/zh/guide/code/repl-it.html
+            // "StackBlitz",   // https://plugin-components.vuejs.press/zh/guide/code/stack-blitz.html
+            // "PDF",          // https://plugin-components.vuejs.press/zh/guide/media/p-d-f.html
+        ]
+
     }),
 
 ];
