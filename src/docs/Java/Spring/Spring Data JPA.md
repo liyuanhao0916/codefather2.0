@@ -1,4 +1,4 @@
-# Spring Data JPA
+# Spring Data JPA 学习指南
 
 ## 概述
 
@@ -184,11 +184,11 @@ public static void main(String[] args) {
     - 如果A是一个removed状态的实例，不会发生任何操作
     - 如果A是一个detached状态的实体，该方法将会抛出异常
 
-## Hello Spring Data Jpa
+## Spring Data JPA
 
+### Hello Spring Data JPA
 
-
-### 依赖
+#### 依赖
 
 ```xml
 <!-- 用来spring data的版本管理-->
@@ -231,7 +231,7 @@ public static void main(String[] args) {
 
 
 
-### 配置文件（2选1）
+#### 配置文件（2选1）
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -281,7 +281,7 @@ public static void main(String[] args) {
 </beans>
 ```
 
-### 配置类（2选1）
+#### 配置类（2选1）
 
 ```java
 @Configuration
@@ -322,13 +322,13 @@ class ApplicationConfig {
 }
 ```
 
-### DAO
+#### DAO
 
 ```java
 public interface CustomerRepository extends CrudRepository<Customer, Integer> { }
 ```
 
-### 测试
+#### 测试
 
 ```java
 
@@ -454,5 +454,350 @@ public void testSortTypeSafe(){
 }
 ```
 
-### JPQL
+
+
+### JPQL与SQL
+
+#### JPQL
+
+- @Query中写jpql，参数占位符两种写法
+  - `?索引`：索引从1开始
+  - `:参数名`：需要用@Param指定参数名
+- 增删改时，需要加两个注解
+  - @Transactional 开启事务，一般加在Service层，加在@Test标记的方法上不生效，这里为了方便直接加在Dao层
+  - @Modifying 标记为DML操作
+  - 新增时，只能在hibernate实现中使用，而且只能用 insert into ... select 语法
+
+```java
+public interface CustomerRepository extends CrudRepository<Customer, Integer> {
+
+
+    @Query("from Customer where name = ?1 order by id desc")
+    List<Customer> findCustomersByName(String name);
+
+    @Query("from Customer where id = :id")
+    Customer findCustomersById(@Param("id") Integer id);
+
+    @Modifying
+    @Transactional
+    @Query("update Customer c set c.name = :name where c.id = :id")
+    int updateCustomersById(@Param("id") Integer id, @Param("name") String name);
+    
+    @Modifying
+    @Transactional
+    @Query("delete from Customer c where c.id = :id")
+    int deleteCustomersById(@Param("id") Integer id);
+    
+    @Modifying
+    @Transactional
+	@Query("INSERT into Customer(name) select name from Customer where id = :id ")
+    int saveCustomersById(@Param("id") Integer id);
+}
+```
+
+#### 原生SQL
+
+原生写法和jpql写法类似，只需要将 @Query 的 nativeQuery 属性设置为 true 即可
+
+可以新增，想咋写就咋写
+
+可以不用事务，但是仍然需要 @Modifying
+
+```java
+public interface CustomerRepository extends CrudRepository<Customer, Integer> {
+
+    @Query(value = "select * from Customer where id = ?1",nativeQuery = true)
+    Customer query(Integer id);
+
+    @Modifying
+    @Query(nativeQuery = true,value = "insert into customer (name) values (?1)")
+    int save(String name);
+}
+```
+
+### 规范方法名
+
+::: tip
+
+只支持查询和删除
+
+:::
+
+####  查询主题关键字
+
+| 关键词                                                       | 描述                                                         |
+| :----------------------------------------------------------- | :----------------------------------------------------------- |
+| `find…By`,,,,,,, `read…By`_ `get…By`_ `query…By`_ `search…By`_`stream…By` | 一般查询方法通常返回存储库类型、a`Collection`或`Streamable`子类型或结果包装器（例如`Page`）`GeoResults`或任何其他特定于存储的结果包装器。可以用作`findBy…`或`findMyDomainTypeBy…`与其他关键字结合使用。 |
+| `exists…By`                                                  | 存在投影，通常返回`boolean`结果。                            |
+| `count…By`                                                   | 返回数字结果的计数投影。                                     |
+| `delete…By`,`remove…By`                                      | 删除查询方法返回不结果 ( `void`) 或删除计数。                |
+| `…First<number>…`,`…Top<number>…`                            | 将查询结果限制为第一个`<number>`结果。该关键字可以出现在主题中`find`（以及其他关键字）和之间的任何位置`by`。 |
+| `…Distinct…`                                                 | 使用不同的查询仅返回唯一的结果。请参阅商店特定文档是否支持该功能。该关键字可以出现在主题中`find`（以及其他关键字）和之间的任何位置`by`。 |
+
+#### 查询谓词关键字
+
+| 逻辑关键字            | 关键词表达式                                  |
+| :-------------------- | :-------------------------------------------- |
+| `AND`                 | `And`                                         |
+| `OR`                  | `Or`                                          |
+| `AFTER`               | `After`,`IsAfter`                             |
+| `BEFORE`              | `Before`,`IsBefore`                           |
+| `CONTAINING`          | `Containing`, `IsContaining`,`Contains`       |
+| `BETWEEN`             | `Between`,`IsBetween`                         |
+| `ENDING_WITH`         | `EndingWith`, `IsEndingWith`,`EndsWith`       |
+| `EXISTS`              | `Exists`                                      |
+| `FALSE`               | `False`,`IsFalse`                             |
+| `GREATER_THAN`        | `GreaterThan`,`IsGreaterThan`                 |
+| `GREATER_THAN_EQUALS` | `GreaterThanEqual`,`IsGreaterThanEqual`       |
+| `IN`                  | `In`,`IsIn`                                   |
+| `IS`                  | `Is`, `Equals`, （或无关键字）                |
+| `IS_EMPTY`            | `IsEmpty`,`Empty`                             |
+| `IS_NOT_EMPTY`        | `IsNotEmpty`,`NotEmpty`                       |
+| `IS_NOT_NULL`         | `NotNull`,`IsNotNull`                         |
+| `IS_NULL`             | `Null`,`IsNull`                               |
+| `LESS_THAN`           | `LessThan`,`IsLessThan`                       |
+| `LESS_THAN_EQUAL`     | `LessThanEqual`,`IsLessThanEqual`             |
+| `LIKE`                | `Like`,`IsLike`                               |
+| `NEAR`                | `Near`,`IsNear`                               |
+| `NOT`                 | `Not`,`IsNot`                                 |
+| `NOT_IN`              | `NotIn`,`IsNotIn`                             |
+| `NOT_LIKE`            | `NotLike`,`IsNotLike`                         |
+| `REGEX`               | `Regex`, `MatchesRegex`,`Matches`             |
+| `STARTING_WITH`       | `StartingWith`, `IsStartingWith`,`StartsWith` |
+| `TRUE`                | `True`,`IsTrue`                               |
+| `WITHIN`              | `Within`,`IsWithin`                           |
+
+#### 查询谓词修饰符关键字
+
+| 关键词                            | 描述                                                         |
+| :-------------------------------- | :----------------------------------------------------------- |
+| `IgnoreCase`,`IgnoringCase`       | 与谓词关键字一起使用以进行不区分大小写的比较。               |
+| `AllIgnoreCase`,`AllIgnoringCase` | 忽略所有合适属性的大小写。在查询方法谓词中的某处使用。       |
+| `OrderBy…`                        | 指定静态排序顺序，后跟属性路径和方向（例如`OrderByFirstnameAscLastnameDesc`）。 |
+
+#### 方法名称中支持的关键字
+
+| Keyword                | Sample                                                       | JPQL snippet                                                 |
+| :--------------------- | :----------------------------------------------------------- | :----------------------------------------------------------- |
+| `Distinct`             | `findDistinctByLastnameAndFirstname`                         | `select distinct … where x.lastname = ?1 and x.firstname = ?2` |
+| `And`                  | `findByLastnameAndFirstname`                                 | `… where x.lastname = ?1 and x.firstname = ?2`               |
+| `Or`                   | `findByLastnameOrFirstname`                                  | `… where x.lastname = ?1 or x.firstname = ?2`                |
+| `Is`, `Equals`         | `findByFirstname`,<br />`findByFirstnameIs`,<br />`findByFirstnameEquals` | `… where x.firstname = ?1`                                   |
+| `Between`              | `findByStartDateBetween`                                     | `… where x.startDate between ?1 and ?2`                      |
+| `LessThan`             | `findByAgeLessThan`                                          | `… where x.age < ?1`                                         |
+| `LessThanEqual`        | `findByAgeLessThanEqual`                                     | `… where x.age <= ?1`                                        |
+| `GreaterThan`          | `findByAgeGreaterThan`                                       | `… where x.age > ?1`                                         |
+| `GreaterThanEqual`     | `findByAgeGreaterThanEqual`                                  | `… where x.age >= ?1`                                        |
+| `After`                | `findByStartDateAfter`                                       | `… where x.startDate > ?1`                                   |
+| `Before`               | `findByStartDateBefore`                                      | `… where x.startDate < ?1`                                   |
+| `IsNull`, `Null`       | `findByAge(Is)Null`                                          | `… where x.age is null`                                      |
+| `IsNotNull`, `NotNull` | `findByAge(Is)NotNull`                                       | `… where x.age not null`                                     |
+| `Like`                 | `findByFirstnameLike`                                        | `… where x.firstname like ?1`                                |
+| `NotLike`              | `findByFirstnameNotLike`                                     | `… where x.firstname not like ?1`                            |
+| `StartingWith`         | `findByFirstnameStartingWith`                                | `… where x.firstname like ?1` (parameter bound with appended `%`) |
+| `EndingWith`           | `findByFirstnameEndingWith`                                  | `… where x.firstname like ?1` (parameter bound with prepended `%`) |
+| `Containing`           | `findByFirstnameContaining`                                  | `… where x.firstname like ?1` (parameter bound wrapped in `%`) |
+| `OrderBy`              | `findByAgeOrderByLastnameDesc`                               | `… where x.age = ?1 order by x.lastname desc`                |
+| `Not`                  | `findByLastnameNot`                                          | `… where x.lastname <> ?1`                                   |
+| `In`                   | `findByAgeIn(Collection<Age> ages)`                          | `… where x.age in ?1`                                        |
+| `NotIn`                | `findByAgeNotIn(Collection<Age> ages)`                       | `… where x.age not in ?1`                                    |
+| `True`                 | `findByActiveTrue()`                                         | `… where x.active = true`                                    |
+| `False`                | `findByActiveFalse()`                                        | `… where x.active = false`                                   |
+| `IgnoreCase`           | `findByFirstnameIgnoreCase`                                  | `… where UPPER(x.firstname) = UPPER(?1)`                     |
+
+### Query by Example
+
+::: warning 痛点
+
+JPQL和规范方法名，无法像Mybatis动态标签那样实现动态的查询，
+
+比如，想根据商品名称查询，又想根据型号等其他条件查询，用上述方法只能写多个方法来完成，
+
+因此就有了Query by Example
+
+但是只支持查询
+
+- 不支持嵌套或分组的属性约束，如 firstname = ?1 or (firstname = ?2 and lastname = ?3)
+- 只支持字符串 start/contains/ends/regex 匹配和其他属性类型的精确匹配。
+
+:::
+
+示例查询 (QBE) 是一种用户友好的查询技术，界面简单。它允许动态查询创建，并且不需要您编写包含字段名称的查询。事实上，示例查询根本不需要您使用特定于商店的查询语言来编写查询
+
+#### DAO
+
+继承 `QueryByExampleExecutor<T>`
+
+```java
+public interface CustomerRepository extends CrudRepository<Customer, Integer>, QueryByExampleExecutor<Customer> {}
+```
+
+#### 方法
+
+```java
+public interface QueryByExampleExecutor<T> {
+
+	<S extends T> Optional<S> findOne(Example<S> example);
+
+	<S extends T> Iterable<S> findAll(Example<S> example);
+
+	<S extends T> Iterable<S> findAll(Example<S> example, Sort sort);
+
+	<S extends T> Page<S> findAll(Example<S> example, Pageable pageable);
+
+	<S extends T> long count(Example<S> example);
+
+	<S extends T> boolean exists(Example<S> example);
+
+	<S extends T, R> R findBy(Example<S> example, Function<FluentQuery.FetchableFluentQuery<S>, R> queryFunction);
+}
+```
+
+#### 测试
+
+```java
+    @Test
+    public void testFindAll() {
+        Customer customer = new Customer();
+        customer.setName("王五");
+        Example<Customer> example = Example.of(customer);
+        System.out.println(repository.findAll(example));
+    }
+
+    @Test
+    public void testFindAll2() {
+        Customer customer = new Customer();
+        customer.setName("WingWu");想·
+        // 匹配器， 去设置更多条件匹配
+        ExampleMatcher matcher = ExampleMatcher.matching()
+                .withIgnoreCase("name");
+        Example<Customer> example = Example.of(customer, matcher);
+        System.out.println(repository.findAll(example));
+    }
+```
+
+### Specifications
+
+在之前使用Query by Example只能针对字符串进行条件设置，那如果希望对所有类型支持，可以使用Specifications
+
+#### DAO
+
+继承`JpaSpecificationExecutor<T>`
+
+```java
+public interface CustomerRepository extends CrudRepository<Customer, Long>, JpaSpecificationExecutor<Customer> {}
+```
+
+#### 测试
+
+- Root：查询哪个表（关联查询） 相当于 from，通过get方法拿到对应列
+- CriteriaQuery：查询哪些字段，排序，用于组合（order by ，where ）
+- CriteriaBuilder：条件之间是什么关系，如何生成一个查询条件，每一个查询条件都是什么类型（>,between, in...) ，相当于 where
+- Predicate（Expression）： 每一条查询条件的详细描述
+
+::: tip
+
+不能分组、聚合函数， 需要自己通过entityManager玩
+
+:::
+
+```java
+@Test
+public void testSpecifications() {
+    List<Customer> customers = repository.findAll((root, query, criteriaBuilder) -> {
+        // root --- 列
+        // query
+        // criteriaBuilder --- 条件
+        Path<Integer> id = root.get("id");
+        Path<String> name = root.get("name");
+
+        return criteriaBuilder.and(
+                criteriaBuilder.gt(id, 2),
+                criteriaBuilder.in(name).value("王五").value("李四")
+        );
+
+    });
+
+    System.out.println(customers);
+}
+```
+
+
+
+### Querydsl
+
+QueryDSL是基于ORM框架或SQL平台上的一个通用查询框架。借助QueryDSL可以在任何支持的ORM框架或SQL平台上以通用API方式构建查询。
+
+JPA是QueryDSL的主要集成技术，是JPQL和Criteria查询的代替方法。目前QueryDSL支持的平台包括JPA，JDO，SQL，Mongodb 等等。。。
+
+Querydsl扩展能让我们以链式方式代码编写查询方法。该扩展需要一个接口QueryDslPredicateExecutor，它定义了很多查询方法。
+
+#### 依赖
+
+```xml
+<!-- querydsl -->
+<dependency>
+    <groupId>com.querydsl</groupId>
+    <artifactId>querydsl-jpa</artifactId>
+    <version>4.4.0</version>
+</dependency>
+```
+
+#### 插件
+
+用来生成Q类
+
+- 用maven执行编译，会在target/generated‐sources/queries生成对应的Q类
+- 将target/generated‐sources/queries文件夹标记为source
+
+```xml
+<plugin>
+    <groupId>com.mysema.maven</groupId>
+    <artifactId>apt-maven-plugin</artifactId>
+    <version>1.1.3</version>
+    <dependencies>
+        <dependency>
+            <groupId>com.querydsl</groupId>
+            <artifactId>querydsl-apt</artifactId>
+            <version>4.4.0</version>
+        </dependency>
+    </dependencies>
+    <executions>
+        <execution>
+            <phase>generate-sources</phase>
+            <goals>
+                <goal>process</goal>
+            </goals>
+            <configuration>
+                <outputDirectory>target/generated‐sources/queries</outputDirectory>
+                <processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>
+                <logOnlyOnError>true</logOnlyOnError>
+            </configuration>
+        </execution>
+    </executions>
+</plugin>
+```
+
+
+
+#### DAO
+
+继承`QuerydslPredicateExecutor<T>`
+
+```java
+public interface CustomerRepository extends CrudRepository<Customer, Integer>, QuerydslPredicateExecutor<Customer> {}
+```
+
+#### 测试
+
+```java
+@Test
+public void testQueryDSL(){
+    QCustomer qCustomer = QCustomer.customer;
+    BooleanExpression expression = qCustomer.id.eq(2)
+            .and(qCustomer.name.endsWith("四"));
+    Optional<Customer> customer = repository.findOne(expression);
+    System.out.println(customer);
+}
+```
 
