@@ -11,7 +11,7 @@ tag:
 
 # WordPress
 
-## 更改文章的链接
+## 更改文章图片链接
 
 - `lyh_posts`：文章表，默认是 `wp_posts`
 - `post_content_filtered`：源文章字段

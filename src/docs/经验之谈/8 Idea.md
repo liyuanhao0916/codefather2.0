@@ -19,4 +19,55 @@
 
 ### 创建SpringBoot 项目不支持jdk17以下
 - 将源改为阿里云即可    `start.aliyun.com`
-### 
+
+
+## Tools
+
+### 远程连接
+
+#### SSH
+
+- 方式一：导航栏 Tools -> Start SSH Session...
+
+  ::: tip 缺点
+
+  每次都需要填表单
+
+  :::
+
+  ![image-20240105115515842](http://minio.botuer.com/study-node/2024/01/05/image-20240105115515842_repeat_1704426922993__212332.png)
+
+- 方式二：Settings -> Tools -> SSH Configurations 添加一个配置
+
+  ![image-20240105121532553](http://minio.botuer.com/study-node/2024/01/05/image-20240105121532553_repeat_1704428132743__568807.png)
+
+​					再通过导航栏 Tools -> Start SSH Session...连接时就可以直接选择
+
+![image-20240105120150405](http://minio.botuer.com/study-node/2024/01/05/image-20240105120150405_repeat_1704427310491__247116.png)
+
+
+
+#### FTP
+
+打开 Tools ->Deployment->Browse Remote Host
+
+填写表单
+
+![image-20240105120821742](http://minio.botuer.com/study-node/2024/01/05/image-20240105120821742_repeat_1704427702048__156422.png)
+
+
+
+接着填表单
+
+![image-20240105121013499](http://minio.botuer.com/study-node/2024/01/05/image-20240105121013499_repeat_1704427813601__696134.png)
+
+
+
+![image-20240105121253580](http://minio.botuer.com/study-node/2024/01/05/image-20240105121253580_repeat_1704427973690__966195.png)
+
+
+
+文章参考
+
+- https://blog.csdn.net/shaoming314/article/details/122013301
+

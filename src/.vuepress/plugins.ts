@@ -2,7 +2,6 @@ import { PluginsOptions } from "vuepress-theme-hope";
 import { searchPlugin } from "@vuepress/plugin-search";
 import { componentsPlugin } from "vuepress-plugin-components";
 import { registerComponentsPlugin } from '@vuepress/plugin-register-components'
-// import { getDirname, path } from 'vuepress/utils'
 import path from 'path'
 
 
@@ -24,30 +23,8 @@ export const pluginsExt = [
         },
         maxSuggestions: 10,
     }),
-    registerComponentsPlugin({
-        // 配置项
-        components: {
-            // RightBar: path.resolve(__dirname, './theme/components/RightBar.vue'),
-            // test: path.resolve(__dirname, './theme/components/test.vue'),
-            // PageSidebar: path.resolve(__dirname, './theme/components/ExtraSidebar.vue'),
-        },
-    }),
-    // [
-    //     'vuepress-plugin-right-anchor',
-    //     {
-    //         showDepth: 1,
-    //         ignore: [
-    //             '/',
-    //             '/api/'
-    //             // 更多...
-    //         ],
-    //         expand: {
-    //             trigger: 'hover',
-    //             clickModeDefaultOpen: true
-    //         },
-    //         customClass: 'your-customClass',
-    //     }
-    // ],
+ 
+
     componentsPlugin({
         // 插件选项
         components: [
@@ -105,7 +82,8 @@ export const plugins = {
     },
 
     autoCatalog: {
-
+        level: 3,
+        index: true,
     },
 
     // markdown 支持 https://plugin-md-enhance.vuejs.press/zh/config.html

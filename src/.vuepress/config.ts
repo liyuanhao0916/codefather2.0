@@ -12,15 +12,15 @@ export default defineUserConfig({
   theme,  // 主题配置
 
   plugins: pluginsExt,  // 插件配置
-  extendsPage: (page) => {
-    // 在 routeMeta 中设置目录信息
-    page.routeMeta = {
-      // 目录标题
-      title: page.title,
-      // ... 其他信息
-    };
-  },
- 
+  // extendsPage: (page) => {
+  //   // 在 routeMeta 中设置目录信息
+  //   page.routeMeta = {
+  //     // 目录标题
+  //     title: page.title,
+  //     // ... 其他信息
+  //   };
+  // },
+
   head: [
     // 站点图标
     ["link", { rel: "icon", href: "/favicon.ico" }],
@@ -56,7 +56,7 @@ export default defineUserConfig({
 
   markdown: {
     headers: {
-      level: [2, 3, 4],
+      level: [2, 3, 4, 5, 6],
     }
   },
 });

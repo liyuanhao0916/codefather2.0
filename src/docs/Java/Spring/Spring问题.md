@@ -1,4 +1,4 @@
-# Spring
+# Spring问题
 
 ## HttpServletRequest可以直接注入吗，会不会存在线程安全问题
 
@@ -230,3 +230,24 @@ location / {
 
 **将InputStream 重新发起http请求，是否阻塞（边读边发），取决于 HTTP 客户端库**，如 Apache HttpClient 或 OkHttp）中，通常可以配置请求以支持流式传输
 
+## 单元测试
+
+### java.lang.NoClassDefFoundError: org/hamcrest/SelfDescribing
+
+- junit.jar: Includes the Hamcrest classes. The simple all-in-one solution to get started quickly.Starting with version 4.11, Hamcrest is no longer included in this jar.
+- junit-dep.jar: Only includes the JUnit classes but not Hamcrest. Lets you use a different Hamcrest version.
+
+
+两个办法解决：
+
+   1.junit版本降到4.10
+
+   2.导入hamcrest-core-1.3.jar
+   ```xml
+   <dependency>
+        <groupId>org.hamcrest</groupId>
+        <artifactId>hamcrest-core</artifactId>
+        <version>1.3</version>
+    </dependency>
+    ```
+如果用 SpringJUnit4ClassRunner， 只能引入 hamcrest-core 否则报错 SpringJUnit4ClassRunner requires JUnit 4.12 or higher.

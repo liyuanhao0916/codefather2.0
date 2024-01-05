@@ -1,7 +1,7 @@
-// const fs = require('fs')
-// const path = require('path')
-import fs from 'fs'
-import path from 'path'
+const fs = require('fs')
+const path = require('path')
+// import fs from 'fs'
+// import path from 'path'
 
 function generateFileList(directory) {
     const result = []
@@ -51,7 +51,7 @@ function generateSideBar(directoryPath) {
         if (fileList[0].isFile) {
             result += `  {\n`
             result += `    text: "${path.basename(directoryPath)}",\n`
-            result += `    collapsible: true,\n`
+            result += `    collapsible: false,\n`
             result += `    prefix: "/docs/${path.basename(directoryPath)}",\n`
             result += `    children: [\n`
             fileList.forEach((item) => {
@@ -71,11 +71,11 @@ function generateSideBar(directoryPath) {
             } else {
                 result += `  {\n`
                 result += `    text: "${item.text}",\n`
-                result += `    collapsible: true,\n`
+                result += `    collapsible: false,\n`
                 result += `    prefix: "/docs/${path.basename(directoryPath)}/${item.text}",\n`
                 result += `    children: [\n`
                 item.children.forEach((child) => {
-                    const name = child.split(".")[0].split("/").pop()
+                    const name = child.text.split(".")[0].split("/").pop()
                     result += `      {text: "${name}", link: "${name}", },\n`
                 })
                 result += `    ],\n`
@@ -110,5 +110,5 @@ function generateSideBarAndWrite(directoryPath) {
     }
 }
 
-const directoryPath = 'D:\\VSCodeProjects\\codefather2.0\\src\\docs\\项目案例' // 替换为你的目录路径
+const directoryPath = 'D:\\VSCodeProjects\\codefather2.0\\src\\docs\\Java' // 替换为你的目录路径
 generateSideBarAndWrite(directoryPath)
